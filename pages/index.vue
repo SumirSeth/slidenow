@@ -1,5 +1,5 @@
 <template>
-  <div :style="{ backgroundColor: mode==='edit'? 'gray' : bg }" class="min-h-screen">
+  <div :style="{ backgroundColor: mode==='edit'? '#292524' : bg }" class="min-h-screen">
     <nav class="fixed top-0 left-0 right-0 z-50 h-20 flex items-center justify-center">
       <div class="bg-black/40 backdrop-brightness-125 backdrop-blur-xl shadow-xl flex items-center lg:space-x-8 space-x-6 lg:px-8 px-6 py-2 rounded-2xl max-w-max">
         <div class="2xl:text-4xl xl:text-4xl lg:text-3xl md:text-3xl sm:text-2xl text-2xl font-[Stardom] font-bold text-white"><NuxtLink to="/">SlideNow</NuxtLink></div>
@@ -15,6 +15,25 @@
         </ul>
       </div>
     </nav>
+
+    <div class="flex justify-center pt-20 text-white">
+      <div v-if="mode === 'edit'" class="editor w-full px-6 md:px-12 lg:px-20">
+        <h1 class="2xl:text-4xl xl:text-4xl lg:text-3xl md:text-3xl sm:text-2xl text-2xl font-[Stardom] font-bold p-2">Slide Editor</h1>
+        <textarea 
+          class="w-full h-[calc(100vh-12rem)] rounded-lg bg-stone-700 focus:outline-none p-4 resize-none font-[Satoshi] shadow-xl"
+          placeholder="Start writing your slides..."
+          v-model="text"
+        ></textarea>
+      </div>
+
+      <div v-else class="viewer">
+        <h1>Viewer</h1>
+      </div>
+
+    </div>
+
+
+
   </div>
 </template>
 
@@ -22,8 +41,32 @@
 const bg = ref("red")
 const mode = ref<"edit" | "view">("edit")
 
+const text = ref("")
+
 </script>
 
 <style>
+
+textarea::-webkit-scrollbar{
+  width: 6px;
+  cursor: pointer;
+}
+
+textarea::-webkit-scrollbar-track{
+  background: #292524;
+  cursor: pointer;
+}
+
+textarea::-webkit-scrollbar-thumb{
+  background: #57534e;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+textarea::-webkit-scrollbar-thumb:hover{
+  background: #79736c;
+  cursor: pointer;
+}
+
 
 </style>
