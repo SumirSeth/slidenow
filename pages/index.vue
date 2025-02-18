@@ -1,5 +1,5 @@
 <template>
-  <div :style="{ backgroundColor: mode==='edit'? '#292524' : bg }" class="min-h-screen">
+  <div :style="{ backgroundColor: mode==='edit'? '#292524' : (text.length>0 && bg.length> 0?bg:'#292D2D') }" class="min-h-screen">
     <nav class="fixed top-0 left-0 right-0 z-50 h-20 flex items-center justify-center">
       <div class="bg-black/40 backdrop-brightness-125 backdrop-blur-xl shadow-xl flex items-center lg:space-x-8 space-x-6 lg:px-8 px-6 py-2 rounded-2xl max-w-max">
         <div class="2xl:text-4xl xl:text-4xl lg:text-3xl md:text-3xl sm:text-2xl text-2xl font-[Stardom] font-bold text-white"><NuxtLink to="/">SlideNow</NuxtLink></div>
@@ -27,7 +27,9 @@
       </div>
 
       <div v-else class="viewer">
-        <h1>Viewer</h1>
+        <div v-if="text.length <= 0" class="no-text flex justify-center items-center h-[80svh]">
+          <h1 class="2xl:text-4xl xl:text-4xl lg:text-3xl md:text-3xl sm:text-2xl text-2xl font-[Stardom] font-bold p-2"><span class="text-red-500">Err!</span> No text found. Start typing in the <span class="italic underline decoration-dotted underline-offset-8 cursor-cell" @click="mode='edit'">edit</span> page.</h1>
+        </div>
       </div>
 
     </div>
@@ -38,9 +40,7 @@
 </template>
 
 <script lang="ts" setup>
-import { parse } from 'vue/compiler-sfc';
-
-const bg = ref("red")
+const bg = ref("")
 const mode = ref<"edit" | "view">("edit")
 
 const text = ref("")
